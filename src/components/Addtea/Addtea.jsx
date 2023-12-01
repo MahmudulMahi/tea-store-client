@@ -1,5 +1,5 @@
 
-
+import Swal from 'sweetalert2'
 const Addtea = () => {
   const handleAddTea = (event) => {
     event.preventDefault();
@@ -11,8 +11,29 @@ const Addtea = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const addTea = { name, chef, supplier, taste, category, details, photo };
-    console.log(addTea);
+    const newTea = { name, chef, supplier, taste, category, details, photo };
+    console.log(newTea);
+
+    // send data to server
+    fetch('http://localhost:5000/tea',{
+    method:'POST',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify(newTea)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      if(data.insertedId){
+        Swal.fire({
+          title: 'success',
+          text: 'add tea successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool'
+        })
+      }
+    })
   }
   return (
     <div className='bg-[#F4F3F0] p-24'>
