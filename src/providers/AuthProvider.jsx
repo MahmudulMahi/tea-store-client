@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../firebase/firebase.config';
 const auth = getAuth(app);
 
@@ -9,12 +9,19 @@ const AuthProvider = ({children}) => {
 
   const [user,setUser]=useState(null)
 
+  // private route er jonno
+  const [loading,setLoading]=useState(true)
+// ------------
+
   const createUser=(email,password)=>{
-    createUserWithEmailAndPassword(auth, email, password)
+    setLoading(true)
+    return createUserWithEmailAndPassword(auth, email, password)
   }
 
   const userInfo={
     user,
+    loading,
+    createUser,
   }
   return (
     <AuthContext.Provider value={userInfo}>
