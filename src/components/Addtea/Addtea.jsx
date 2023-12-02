@@ -1,7 +1,7 @@
 
 import Swal from 'sweetalert2'
 const Addtea = () => {
-  const handleUpdateTea = (event) => {
+  const handleAddTea = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -11,21 +11,21 @@ const Addtea = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const updatetea = { name, chef, supplier, taste, category, details, photo };
-    console.log(updatetea);
+    const  newTea= { name, chef, supplier, taste, category, details, photo };
+    console.log(newTea);
 
     // send data to server
-    fetch(`http://localhost:5000/tea/${_id}`,{
-    method:'PUT',
+    fetch('http://localhost:5000/tea',{
+    method:'POST',
     headers:{
       'content-type':'application/json'
     },
-    body:JSON.stringify(updatetea)
+    body:JSON.stringify(newTea)
     })
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if(data.insertedId){
+      if(data.modifiedCount>0){
         Swal.fire({
           title: 'success',
           text: 'add tea successfully',
@@ -38,7 +38,7 @@ const Addtea = () => {
   return (
     <div className='bg-[#F4F3F0] p-24'>
       <h2>Add a Tea</h2>
-    <form onSubmit={handleUpdateTea} >
+    <form onSubmit={handleAddTea} >
             {/* Row 1 */}
             <div className="md:flex gap-6 my-3">
               <div className="form-control md:w-1/2">
