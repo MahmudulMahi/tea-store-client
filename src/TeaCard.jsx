@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const TeaCard = ({ tea }) => {
+const TeaCard = ({ tea,teas,setTeas }) => {
 
   const { _id, name, chef, supplier, taste, category, details, photo } = tea
 
@@ -32,6 +32,8 @@ const TeaCard = ({ tea }) => {
           text: "Your file has been deleted.",
           icon: "success"
         });
+        const remaining=teas.filter(cof =>cof._id !==_id)
+        setTeas(remaining)
           }
         })
       }
