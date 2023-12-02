@@ -1,7 +1,7 @@
 
 import Swal from 'sweetalert2'
 const Addtea = () => {
-  const handleAddTea = (event) => {
+  const handleUpdateTea = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -11,16 +11,16 @@ const Addtea = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const newTea = { name, chef, supplier, taste, category, details, photo };
-    console.log(newTea);
+    const updatetea = { name, chef, supplier, taste, category, details, photo };
+    console.log(updatetea);
 
     // send data to server
-    fetch('http://localhost:5000/tea',{
-    method:'POST',
+    fetch(`http://localhost:5000/tea/${_id}`,{
+    method:'PUT',
     headers:{
       'content-type':'application/json'
     },
-    body:JSON.stringify(newTea)
+    body:JSON.stringify(updatetea)
     })
     .then(res=>res.json())
     .then(data=>{
@@ -38,7 +38,7 @@ const Addtea = () => {
   return (
     <div className='bg-[#F4F3F0] p-24'>
       <h2>Add a Tea</h2>
-    <form onSubmit={handleAddTea} >
+    <form onSubmit={handleUpdateTea} >
             {/* Row 1 */}
             <div className="md:flex gap-6 my-3">
               <div className="form-control md:w-1/2">
