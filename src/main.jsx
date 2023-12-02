@@ -10,6 +10,9 @@ import {
 import Addtea from './components/Addtea/Addtea.jsx';
 
 import Updatetea from './components/Updatetea/Updatetea.jsx';
+import SignUp from './components/SignUp/SignUp.jsx';
+import LogIn from './components/LogIn/LogIn.jsx';
+import AuthProvider from './providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,10 +29,22 @@ const router = createBrowserRouter([
     element:<Updatetea></Updatetea>,
     loader:({params})=>fetch(`http://localhost:5000/tea/${params.id}`)
   },
+  {
+    path:'/signup',
+    element:<SignUp></SignUp>
+  },
+  
+  {
+    path:'/signin',
+    element:<LogIn></LogIn>
+  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
