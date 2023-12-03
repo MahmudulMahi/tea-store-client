@@ -13,6 +13,7 @@ import Updatetea from './components/Updatetea/Updatetea.jsx';
 import SignUp from './components/SignUp/SignUp.jsx';
 import LogIn from './components/LogIn/LogIn.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
+import Users from './Users/Users.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
   {
     path:'/signin',
     element:<LogIn></LogIn>
+  },
+  {
+    path:'/users',
+    element:<Users></Users>,
+    loader:()=>fetch('http://localhost:5000/user')
   },
 
 ]);
